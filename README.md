@@ -39,3 +39,17 @@
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Charts**: [Recharts](https://recharts.org/) & Lucide React Icons
 - **Visualisasi Peta**: Pure SVG Mathematical Isometric Projection
+
+---
+
+## 📊 OEE Analytics — Factory Floor Map (update)
+
+Halaman **OEE Analytics** (`/analytics`) dirombak untuk Section Head dan Shift Leader:
+
+- **Filter**: Plant, Zone (per zona atau semua zona), dan horizon waktu *Current Shift · This Week · This Month · This Year*. Pilihan filter tersimpan saat berpindah halaman.
+- **Live Issue Log** (Current Shift: mesin yang sedang stop, jam mulai & durasi) atau **Issue Log** (horizon lain: total downtime & jumlah stop).
+- **Performance Issues**: line yang running di bawah kecepatan standar (ppm aktual vs standar).
+- **Factory Floor Map**: setiap line menampilkan OEE, PPM, Output, status, dan rantai mesin (OEE/PPM/Output per mesin).
+- **Klik line → Line Performance** (`/analytics/line/$plantId/$zoneId/$lineId?h=<horizon>`): KPI strip, Line Condition, rantai mesin, Active Alarms/Top Stops, tren OEE (tooltip A/P/Q), Output vs plan (kumulatif, reset saat ganti PO), Line speed, serta tab per mesin dengan ilustrasi, MTTR/MTBF, donut OEE, A/P/Q, dan Machine Informations.
+
+Data horizon diturunkan secara deterministik dari mock data shift (`src/lib/oee/horizon.ts`).

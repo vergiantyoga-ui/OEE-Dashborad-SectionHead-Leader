@@ -1,7 +1,17 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type Context, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type Context,
+  type ReactNode,
+} from "react";
 
-import { DEFAULT_PLANT_ID } from "./data";
+import { DEFAULT_PLANT_ID, DEFAULT_ZONE_ID } from "./data";
 import { snapResolution, type ResolutionId, type SpanId } from "./filters";
+import type { HorizonId } from "./horizon";
 
 export type Role = "shift-leader" | "section-head";
 
@@ -15,6 +25,13 @@ export type Filters = {
   sku: string | "all";
 };
 
+/** OEE Analytics floor-map filters (Plant, Zone, time horizon). */
+export type FloorFilters = {
+  plantId: string;
+  zoneId: string | "all";
+  horizon: HorizonId;
+};
+
 type Ctx = {
   role: Role;
   setRole: (r: Role) => void;
@@ -25,6 +42,9 @@ type Ctx = {
   filters: Filters;
   /** Applies the cascading rules from §5 automatically. */
   setFilters: (patch: Partial<Filters>) => void;
+  floor: FloorFilters;
+  /** Changing plant resets zone to the plant's first zone. */
+  setFloor: (patch: Partial<FloorFilters>) => void;
 };
 
 // Keep a single context instance across hot-module reloads. Without this, a
@@ -45,6 +65,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
     lineIds: [],
     sku: "all",
   });
+
+  const [floor, setFloorState] = useState<FloorFilters>({
+    plantId: DEFAULT_PLANT_ID,
+    zoneId: DEFAULT_ZONE_ID,
+    horizon: "shift",
+  });
+
+  const setFloor = useCallback((patch: Partial<FloorFilters>) => {
+    setFloorState((prev) => {
+      const next = { ...prev, ...patch };
+      if (patch.plantId && patch.plantId !== prev.plantId && !patch.zoneId)
+        next.zoneId = DEFAULT_ZONE_ID;
+      return next;
+    });
+  }, []);
 
   const setFilters = useCallback((patch: Partial<Filters>) => {
     setFiltersState((prev) => {
@@ -78,8 +113,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setIsDarkMode,
       filters,
       setFilters,
+      floor,
+      setFloor,
     }),
-    [role, isCollapsed, isDarkMode, filters, setFilters],
+    [role, isCollapsed, isDarkMode, filters, setFilters, floor, setFloor],
   );
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

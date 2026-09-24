@@ -17,6 +17,7 @@ import { Route as AnalyticsParetoRouteImport } from './routes/analytics.pareto'
 import { Route as LiveIndexRouteImport } from './routes/live.index'
 import { Route as LivePlantIdIndexRouteImport } from './routes/live.$plantId.index'
 import { Route as LivePlantIdZoneIdIndexRouteImport } from './routes/live.$plantId.$zoneId.index'
+import { Route as AnalyticsLinePlantIdZoneIdLineIdRouteImport } from './routes/analytics.line.$plantId.$zoneId.$lineId'
 import { Route as LivePlantIdZoneIdLineIdIndexRouteImport } from './routes/live.$plantId.$zoneId.$lineId.index'
 import { Route as LivePlantIdZoneIdLineIdMachineIdRouteImport } from './routes/live.$plantId.$zoneId.$lineId.$machineId'
 
@@ -60,6 +61,12 @@ const LivePlantIdZoneIdIndexRoute = LivePlantIdZoneIdIndexRouteImport.update({
   path: '/live/$plantId/$zoneId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalyticsLinePlantIdZoneIdLineIdRoute =
+  AnalyticsLinePlantIdZoneIdLineIdRouteImport.update({
+    id: '/analytics/line/$plantId/$zoneId/$lineId',
+    path: '/analytics/line/$plantId/$zoneId/$lineId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LivePlantIdZoneIdLineIdIndexRoute =
   LivePlantIdZoneIdLineIdIndexRouteImport.update({
     id: '/live/$plantId/$zoneId/$lineId/',
@@ -82,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/live/': typeof LiveIndexRoute
   '/live/$plantId/': typeof LivePlantIdIndexRoute
   '/live/$plantId/$zoneId/': typeof LivePlantIdZoneIdIndexRoute
+  '/analytics/line/$plantId/$zoneId/$lineId': typeof AnalyticsLinePlantIdZoneIdLineIdRoute
   '/live/$plantId/$zoneId/$lineId/$machineId': typeof LivePlantIdZoneIdLineIdMachineIdRoute
   '/live/$plantId/$zoneId/$lineId/': typeof LivePlantIdZoneIdLineIdIndexRoute
 }
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
   '/live': typeof LiveIndexRoute
   '/live/$plantId': typeof LivePlantIdIndexRoute
   '/live/$plantId/$zoneId': typeof LivePlantIdZoneIdIndexRoute
+  '/analytics/line/$plantId/$zoneId/$lineId': typeof AnalyticsLinePlantIdZoneIdLineIdRoute
   '/live/$plantId/$zoneId/$lineId/$machineId': typeof LivePlantIdZoneIdLineIdMachineIdRoute
   '/live/$plantId/$zoneId/$lineId': typeof LivePlantIdZoneIdLineIdIndexRoute
 }
@@ -107,6 +116,7 @@ export interface FileRoutesById {
   '/live/': typeof LiveIndexRoute
   '/live/$plantId/': typeof LivePlantIdIndexRoute
   '/live/$plantId/$zoneId/': typeof LivePlantIdZoneIdIndexRoute
+  '/analytics/line/$plantId/$zoneId/$lineId': typeof AnalyticsLinePlantIdZoneIdLineIdRoute
   '/live/$plantId/$zoneId/$lineId/$machineId': typeof LivePlantIdZoneIdLineIdMachineIdRoute
   '/live/$plantId/$zoneId/$lineId/': typeof LivePlantIdZoneIdLineIdIndexRoute
 }
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/live/'
     | '/live/$plantId/'
     | '/live/$plantId/$zoneId/'
+    | '/analytics/line/$plantId/$zoneId/$lineId'
     | '/live/$plantId/$zoneId/$lineId/$machineId'
     | '/live/$plantId/$zoneId/$lineId/'
   fileRoutesByTo: FileRoutesByTo
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/$plantId'
     | '/live/$plantId/$zoneId'
+    | '/analytics/line/$plantId/$zoneId/$lineId'
     | '/live/$plantId/$zoneId/$lineId/$machineId'
     | '/live/$plantId/$zoneId/$lineId'
   id:
@@ -145,6 +157,7 @@ export interface FileRouteTypes {
     | '/live/'
     | '/live/$plantId/'
     | '/live/$plantId/$zoneId/'
+    | '/analytics/line/$plantId/$zoneId/$lineId'
     | '/live/$plantId/$zoneId/$lineId/$machineId'
     | '/live/$plantId/$zoneId/$lineId/'
   fileRoutesById: FileRoutesById
@@ -158,6 +171,7 @@ export interface RootRouteChildren {
   LiveIndexRoute: typeof LiveIndexRoute
   LivePlantIdIndexRoute: typeof LivePlantIdIndexRoute
   LivePlantIdZoneIdIndexRoute: typeof LivePlantIdZoneIdIndexRoute
+  AnalyticsLinePlantIdZoneIdLineIdRoute: typeof AnalyticsLinePlantIdZoneIdLineIdRoute
   LivePlantIdZoneIdLineIdMachineIdRoute: typeof LivePlantIdZoneIdLineIdMachineIdRoute
   LivePlantIdZoneIdLineIdIndexRoute: typeof LivePlantIdZoneIdLineIdIndexRoute
 }
@@ -220,6 +234,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LivePlantIdZoneIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analytics/line/$plantId/$zoneId/$lineId': {
+      id: '/analytics/line/$plantId/$zoneId/$lineId'
+      path: '/analytics/line/$plantId/$zoneId/$lineId'
+      fullPath: '/analytics/line/$plantId/$zoneId/$lineId'
+      preLoaderRoute: typeof AnalyticsLinePlantIdZoneIdLineIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/live/$plantId/$zoneId/$lineId/': {
       id: '/live/$plantId/$zoneId/$lineId/'
       path: '/live/$plantId/$zoneId/$lineId'
@@ -246,6 +267,7 @@ const rootRouteChildren: RootRouteChildren = {
   LiveIndexRoute: LiveIndexRoute,
   LivePlantIdIndexRoute: LivePlantIdIndexRoute,
   LivePlantIdZoneIdIndexRoute: LivePlantIdZoneIdIndexRoute,
+  AnalyticsLinePlantIdZoneIdLineIdRoute: AnalyticsLinePlantIdZoneIdLineIdRoute,
   LivePlantIdZoneIdLineIdMachineIdRoute: LivePlantIdZoneIdLineIdMachineIdRoute,
   LivePlantIdZoneIdLineIdIndexRoute: LivePlantIdZoneIdLineIdIndexRoute,
 }

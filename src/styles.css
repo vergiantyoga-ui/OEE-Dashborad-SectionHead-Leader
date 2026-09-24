@@ -147,6 +147,18 @@
   --loss-caret: oklch(0.57 0.2 27);
   --loss-badge: oklch(0.93 0.05 252);
   --loss-badge-foreground: oklch(0.5 0.19 255);
+  --machine-top: oklch(0.9 0.006 250);
+  --machine-left: oklch(0.8 0.008 250);
+  --machine-right: oklch(0.69 0.01 250);
+  --machine-line: oklch(0.52 0.015 250);
+  --machine-panel: oklch(0.95 0.004 250);
+  --machine-dark: oklch(0.32 0.015 255);
+  --machine-cap: oklch(0.55 0.12 255);
+  --machine-frame-top: oklch(0.78 0.01 250);
+  --machine-frame-left: oklch(0.66 0.012 250);
+  --machine-frame-right: oklch(0.56 0.014 250);
+  --chart-oee: oklch(0.6 0.16 255);
+  --chart-output: oklch(0.72 0.16 60);
 }
 
 .dark {
@@ -209,6 +221,18 @@
   --loss-caret: oklch(0.7 0.18 27);
   --loss-badge: oklch(0.3 0.08 252);
   --loss-badge-foreground: oklch(0.75 0.14 255);
+  --machine-top: oklch(0.58 0.012 255);
+  --machine-left: oklch(0.47 0.014 255);
+  --machine-right: oklch(0.38 0.016 255);
+  --machine-line: oklch(0.82 0.01 255);
+  --machine-panel: oklch(0.66 0.01 255);
+  --machine-dark: oklch(0.22 0.02 260);
+  --machine-cap: oklch(0.7 0.12 255);
+  --machine-frame-top: oklch(0.52 0.012 255);
+  --machine-frame-left: oklch(0.42 0.014 255);
+  --machine-frame-right: oklch(0.34 0.016 255);
+  --chart-oee: oklch(0.7 0.14 255);
+  --chart-output: oklch(0.78 0.15 60);
 }
 
 @layer base {
