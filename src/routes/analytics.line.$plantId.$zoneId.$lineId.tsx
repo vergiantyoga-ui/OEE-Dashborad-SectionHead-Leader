@@ -123,7 +123,7 @@ function LinePerformancePage() {
                 ]}
               />
             }
-            bodyClassName="min-h-[230px] p-3"
+            bodyClassName="justify-end p-3"
           >
             <OeeTrendChart data={trend} zoneAvg={zoneAvg} />
           </Panel>
@@ -142,7 +142,7 @@ function LinePerformancePage() {
                 ]}
               />
             }
-            bodyClassName="min-h-[230px] p-3"
+            bodyClassName="justify-end p-3"
           >
             <OutputPlanChart data={trend} />
           </Panel>
@@ -156,7 +156,7 @@ function LinePerformancePage() {
                 ]}
               />
             }
-            bodyClassName="min-h-[230px] p-3"
+            bodyClassName="justify-end p-3"
           >
             <LineSpeedChart data={trend} stdPpm={view.stdPpm} />
           </Panel>
