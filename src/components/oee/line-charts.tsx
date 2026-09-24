@@ -85,8 +85,8 @@ export function OeeTrendChart({ data, zoneAvg }: { data: TrendPoint[]; zoneAvg: 
   const mean = data.reduce((a, d) => a + d.oee, 0) / Math.max(1, data.length);
   const dip = Math.min(OEE_TIERS.warn, mean - 8);
   return (
-    <div className="relative min-h-[200px] w-full flex-1">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="relative h-[240px] w-full min-w-0 shrink-0">
+      <ResponsiveContainer width="100%" height={240} debounce={50}>
         <AreaChart data={data} margin={MARGIN}>
           <defs>
             <linearGradient id="oeeFill" x1="0" y1="0" x2="0" y2="1">
@@ -118,8 +118,8 @@ export function OeeTrendChart({ data, zoneAvg }: { data: TrendPoint[]; zoneAvg: 
 export function OutputPlanChart({ data }: { data: TrendPoint[] }) {
   const po = data.find((d) => d.poChange);
   return (
-    <div className="relative min-h-[200px] w-full flex-1">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="relative h-[240px] w-full min-w-0 shrink-0">
+      <ResponsiveContainer width="100%" height={240} debounce={50}>
         <LineChart data={data} margin={MARGIN}>
           <CartesianGrid stroke="var(--grid)" vertical={false} />
           <XAxis dataKey="label" tick={AXIS} stroke="var(--grid)" minTickGap={14} />
@@ -176,8 +176,8 @@ export function LineSpeedChart({ data, stdPpm }: { data: TrendPoint[]; stdPpm: n
   const mean = data.reduce((a, d) => a + d.speed, 0) / Math.max(1, data.length);
   const max = Math.ceil((stdPpm * 1.15) / 10) * 10;
   return (
-    <div className="relative min-h-[200px] w-full flex-1">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="relative h-[240px] w-full min-w-0 shrink-0">
+      <ResponsiveContainer width="100%" height={240} debounce={50}>
         <AreaChart data={data} margin={MARGIN}>
           <defs>
             <linearGradient id="speedFill" x1="0" y1="0" x2="0" y2="1">
